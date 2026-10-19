@@ -1,6 +1,8 @@
 build/
+/build-*/
 bin/
 lib/
+.build-llvm/
 
 .DS_Store
 .vscode/
