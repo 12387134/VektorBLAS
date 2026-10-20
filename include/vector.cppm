@@ -1,5 +1,13 @@
-export module vector;
+export module vektor:vector;
 
-namespace vektor {
-    
+export namespace vektor {
+
+    inline namespace naive {
+
+        struct test {
+            int value{};
+        };
+
+    }
+
 }

@@ -1,3 +1,5 @@
-int main() {
+import vektor;
 
+int main() {
+    
 }

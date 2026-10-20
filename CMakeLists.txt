@@ -18,29 +18,42 @@ set(CMAKE_CXX_STDLIB_MODULES_JSON
     "/opt/homebrew/opt/llvm/lib/c++/libc++.modules.json"
 )
 
+set(VEKTOR_ARCH_MODULES)
+
+if (APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "^(arm64|aarch64)$")
+
+    list(APPEND VEKTOR_ARCH_MODULES
+        src/matrix/matrix_arm.cpp
+        src/vector/vector_arm.cpp
+    )
+
+    message(STATUS "VektorBLAS: Target architecture = ARM64 (NEON)")
+
+elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "^(x86_64|AMD64|amd64)$")
+
+    list(APPEND VEKTOR_ARCH_MODULES
+        src/matrix/matrix_avx.cpp
+        src/vector/vector_avx.cpp
+    )
+
+    message(STATUS "VektorBLAS: Target architecture = x86_64 (AVX)")
+
+else()
+
+    message(FATAL_ERROR
+        "Unsupported architecture: ${CMAKE_SYSTEM_PROCESSOR}"
+    )
+
+endif()
+
 add_executable(vektor_app
     src/main.cpp
 )
 
-if (APPLE AND CMAKE_SYSTEM_PROCESSOR MATCHES "arm64|aarch64")
-    target_sources(vektor_app PRIVATE
-        src/matrix/matrix_arm.cpp
-        src/vector/vector_arm.cpp
-    )
-    message(STATUS "VektorBLAS: Target architecture = ARM64 (NEON)")
-
-elseif (CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64|AMD64")
-    target_sources(vektor_app PRIVATE
-        src/matrix/matrix_avx.cpp
-        src/vector/vector_avx.cpp
-    )
-    message(STATUS "VektorBLAS: Target architecture = x86_64 (AVX)")
-
-endif()
-
 target_sources(vektor_app
-    PUBLIC
+    PRIVATE
     FILE_SET CXX_MODULES FILES
+        include/vektor.cppm
         include/vector.cppm
         include/matrix.cppm
 )
