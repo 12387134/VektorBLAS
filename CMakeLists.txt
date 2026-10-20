@@ -53,6 +53,7 @@ add_executable(vektor_app
 target_sources(vektor_app
     PRIVATE
     FILE_SET CXX_MODULES FILES
+        include/types.cppm
         include/vektor.cppm
         include/vector.cppm
         include/matrix.cppm
