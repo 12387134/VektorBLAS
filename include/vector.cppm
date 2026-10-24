@@ -10,10 +10,13 @@ export namespace vektor {
         * @brief fixed-size mathematical vector
         * @tparam T The datatype of the vector
         * @tparam D The amount of dimensions of the vector
-        * @return None
         **/
         template <typename T, std::size_t D>
         class Vector {
+
+            static_assert(D > 0, "Dimensions must be greater than 0");
+            static_assert(std::is_arithmetic_v<T>, "Vector data type must meet type trait std::is_arithmetic_v<T>");
+
             private:
                 std::array<T, D> m_data{};
 
@@ -25,6 +28,14 @@ export namespace vektor {
 
             [[nodiscard]] constexpr const T& operator[](std::size_t index) const noexcept {
                 return m_data[index];
+            }
+
+            [[nodiscard]] constexpr T& at(std::size_t index) {
+                return m_data.at(index);
+            }
+
+            [[nodiscard]] constexpr const T& at(std::size_t index) const {
+                return m_data.at(index);
             }
 
             constexpr Vector() = default;
@@ -41,7 +52,7 @@ export namespace vektor {
                 }
             }
 
-            // TODO: Refactor mathematical operations to use std::transform rather than for loops
+            // TODO: Refactor mathematical operations to use std::ranges::transform rather than for loops
 
             [[nodiscard]] constexpr Vector operator+(const Vector& other) const {
                 Vector result{};
