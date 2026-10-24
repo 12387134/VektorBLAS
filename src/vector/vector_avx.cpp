@@ -1,1 +1,1 @@
-module vektor:vector;
+module vektor:simd;

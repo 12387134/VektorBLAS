@@ -1,1 +1,1 @@
-module vektor:matrix;
+module vektor:simd;
