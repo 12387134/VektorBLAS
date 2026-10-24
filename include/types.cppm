@@ -5,7 +5,7 @@ import std;
 export namespace vektor {
 
     namespace types {
-
+        
         using usize = std::size_t;
 
         using i8 = std::int8_t;

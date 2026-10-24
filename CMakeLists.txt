@@ -57,6 +57,7 @@ target_sources(vektor_app
         include/vektor.cppm
         include/vector.cppm
         include/matrix.cppm
+        include/simd.cppm
 )
 
 set_property(TARGET vektor_app PROPERTY CXX_MODULE_STD ON)

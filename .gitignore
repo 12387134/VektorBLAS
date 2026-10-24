@@ -3,9 +3,12 @@ build/
 bin/
 lib/
 .build-llvm/
+.html/
+/html/
 
 .DS_Store
 .vscode/
+Doxyfile
 
 *.dSYM
 *.pcm
@@ -22,3 +25,4 @@ lib/
 *.app
 
 .clangd
+latex/
