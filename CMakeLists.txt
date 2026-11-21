@@ -45,6 +45,7 @@ target_sources(vektor_blas
     FILE_SET CXX_MODULES FILES
     BASE_DIRS ${CMAKE_CURRENT_SOURCE_DIR}
     FILES
+        include/vektor_math.cppm
         include/types.cppm
         include/vektor.cppm
         include/vector.cppm
