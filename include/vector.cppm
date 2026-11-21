@@ -40,8 +40,8 @@ export namespace vektor {
 
             constexpr Vector() = default;
 
-            // TODO: Refactor to use std::copy rather than a for loop, implement a second constructor using std::span instead of initializer list
             constexpr Vector(const std::initializer_list<T>& elements) {
+                //static_assert(elements.size() < D);
                 if (elements.size() > D) [[unlikely]] {
                     throw std::invalid_argument("Parameters exceed provided dimensions");
                 }
@@ -52,22 +52,18 @@ export namespace vektor {
                 }
             }
 
-            // TODO: Refactor mathematical operations to use std::ranges::transform rather than for loops
-
-            [[nodiscard]] constexpr Vector operator+(const Vector& other) const {
-                Vector result{};
+            constexpr Vector& operator+=(const Vector& other) noexcept {
                 for (std::size_t index{0}; index < D; index++) {
-                    result[index] = m_data[index] + other[index];
+                    m_data[index] += other[index];
                 }
-                return result;
+                return *this;
             }
 
-            [[nodiscard]] constexpr Vector operator-(const Vector& other) const {
-                Vector result{};
+            constexpr Vector& operator-=(const Vector& other) noexcept {
                 for (std::size_t index{0}; index < D; index++) {
-                    result[index] = m_data[index] - other[index];
+                    m_data[index] -= other[index];
                 }
-                return result;
+                return *this;
             }
 
         };

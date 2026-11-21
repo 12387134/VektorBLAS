@@ -4,8 +4,6 @@ import std;
 
 export namespace vektor {
 
-    namespace types {
-        
         using usize = std::size_t;
 
         using i8 = std::int8_t;
@@ -23,7 +21,5 @@ export namespace vektor {
 
         static_assert(sizeof(f32) == 4);
         static_assert(sizeof(f64) == 8);
-
-    }
 
 }

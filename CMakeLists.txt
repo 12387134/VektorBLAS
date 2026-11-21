@@ -46,11 +46,11 @@ else()
 
 endif()
 
-add_executable(vektor_app
+add_executable(vektor_blas
     src/main.cpp
 )
 
-target_sources(vektor_app
+target_sources(vektor_blas
     PRIVATE
     FILE_SET CXX_MODULES FILES
         include/types.cppm
@@ -60,4 +60,4 @@ target_sources(vektor_app
         include/simd.cppm
 )
 
-set_property(TARGET vektor_app PROPERTY CXX_MODULE_STD ON)
+set_property(TARGET vektor_blas PROPERTY CXX_MODULE_STD ON)

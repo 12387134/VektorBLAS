@@ -8,7 +8,7 @@ int main() {
     vektor::Vector<float, 2> pos2{};
 
     #else
-    Vector<int, 9> pos1{};
+    Vector<int, 2> pos1{1, 2};
 
     #endif
 }
