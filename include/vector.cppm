@@ -4,6 +4,9 @@ import std;
 
 export namespace vektor {
 
+    template <typename T>
+    concept vektor_numeric = (std::integral<T> || std::floating_point<T>) && !std::same_as<T, bool>;
+
     inline namespace naive {
 
         /**
@@ -11,11 +14,10 @@ export namespace vektor {
         * @tparam T The datatype of the vector
         * @tparam D The amount of dimensions of the vector
         **/
-        template <typename T, std::size_t D>
+        template <vektor_numeric T, std::size_t D>
         class Vector {
-
+            // * Catch invalid number of dimensions provided during compilation time
             static_assert(D > 0, "Dimensions must be greater than 0");
-            static_assert(std::is_arithmetic_v<T>, "Vector data type must meet type trait std::is_arithmetic_v<T>");
 
             private:
                 std::array<T, D> m_data{};
@@ -41,7 +43,6 @@ export namespace vektor {
             constexpr Vector() = default;
 
             constexpr Vector(const std::initializer_list<T>& elements) {
-                //static_assert(elements.size() < D);
                 if (elements.size() > D) [[unlikely]] {
                     throw std::invalid_argument("Parameters exceed provided dimensions");
                 }
@@ -64,6 +65,22 @@ export namespace vektor {
                     m_data[index] -= other[index];
                 }
                 return *this;
+            }
+
+            friend Vector operator+(Vector lhs, const Vector& rhs) noexcept {
+                return lhs += rhs;
+            }
+
+            friend Vector operator-(Vector lhs, const Vector& rhs) noexcept {
+                return lhs -= rhs;
+            }
+
+            // * Temporary utility function, will be omitted upon release
+            friend void show(const vektor::Vector<T, D>& vec) {
+                for (const auto& each : vec.m_data) {
+                    std::print("{} ", each);
+                } 
+                std::println();
             }
 
         };
