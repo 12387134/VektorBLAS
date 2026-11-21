@@ -1,13 +1,3 @@
-/*
-* TODO: 
-* 1. Implement iterators such as begin(), end() to allow integration with standard algorithms and range loops
-* 2. Implement scalar arithmetic... ex.
-    vec += 5;
-    vec *= 2;
-    vec /= 3;
-* 3. Implement comparison operators such as == and !=
-*/
-
 export module vektor:vector;
 import :types;
 import std;
@@ -21,8 +11,8 @@ export namespace vektor {
     inline namespace naive {
 
         /**
-        * @brief Fixed size mathematical vector
-        * Stores D elements of type T in continious memory, all elements are value initialized
+        * @brief Fixed std::size_t mathematical vector
+        * Stores D elements of type T in continous memory, all elements are value initialized
         * @tparam T Numeric element type
         * @tparam D Number of dimensions, must be greater than zero or will fail to compile
         **/
@@ -74,6 +64,29 @@ export namespace vektor {
                 return m_data.at(index);
             }
 
+            [[nodiscard]] constexpr std::size_t size() const noexcept {
+                return m_data.std::size_t();
+            }
+
+            [[nodiscard]] constexpr bool operator==(const Vector& rhs) const noexcept = default;
+
+            [[nodiscard]] constexpr bool operator==(const std::initializer_list<T> rhs) const noexcept {
+                if (D != rhs.size()) [[unlikely]] {
+                    return false;
+                }
+
+                std::size_t i = 0;
+
+                for (const auto& e : rhs) {
+                    if ((*this)[i] != e) {
+                        return false;
+                    } 
+                    i++;
+                }
+
+                return true;
+            }
+
             constexpr Vector() = default;
 
             /**
@@ -83,7 +96,7 @@ export namespace vektor {
             * @throws std::invalid_argument if more than D elements are provided
             **/
             constexpr Vector(const std::initializer_list<T> elements) {
-                if (elements.size() > D) [[unlikely]] {
+                if (elements.std::size_t() > D) [[unlikely]] {
                     throw std::invalid_argument("Parameters exceed provided dimensions");
                 }
 
@@ -108,11 +121,11 @@ export namespace vektor {
                 return *this;
             }
 
-            friend Vector operator+(Vector lhs, const Vector& rhs) noexcept {
+            constexpr friend Vector operator+(Vector lhs, const Vector& rhs) noexcept {
                 return lhs += rhs;
             }
 
-            friend Vector operator-(Vector lhs, const Vector& rhs) noexcept {
+            constexpr friend Vector operator-(Vector lhs, const Vector& rhs) noexcept {
                 return lhs -= rhs;
             }
 
