@@ -19,7 +19,7 @@ export namespace vektor {
         using f32 = float;
         using f64 = double;
 
-        static_assert(sizeof(f32) == 4);
-        static_assert(sizeof(f64) == 8);
+        static_assert(sizeof(f32) == 4 && std::numeric_limits<f32>::is_iec559, "f32 must be a 32 bit IEEE 754 floating point type");
+        static_assert(sizeof(f64) == 8 && std::numeric_limits<f64>::is_iec559, "f64 must be a 64 bit IEEE 754 floating point type");
 
 }
