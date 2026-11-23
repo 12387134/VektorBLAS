@@ -106,6 +106,30 @@ export namespace vektor {
                 }
             }
 
+            constexpr auto begin() noexcept {
+                return m_data.begin();
+            }
+
+            constexpr auto begin() const noexcept {
+                return m_data.begin();
+            }
+
+            constexpr auto end() noexcept {
+                return m_data.end();
+            }
+
+            constexpr auto end() const noexcept {
+                return m_data.end();
+            }
+
+            constexpr auto cbegin() const noexcept {
+                return m_data.cbegin();
+            }
+
+            constexpr auto cend() const noexcept {
+                return m_data.cend();
+            }
+
 
             constexpr Vector& operator+=(const Vector& other) noexcept {
                 for (std::size_t index{0}; index < D; index++) {
