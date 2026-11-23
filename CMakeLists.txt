@@ -68,7 +68,7 @@ if (BUILD_TESTING)
     endif()
 
     add_executable(tests
-        tests/tests.cpp
+        tests/vector_tests.cpp
     )
     target_link_libraries(tests PRIVATE vektor_blas Catch2::Catch2WithMain)
 

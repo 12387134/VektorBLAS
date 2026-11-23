@@ -1,10 +1,7 @@
 export module vektor:types;
-
 import std;
 
 export namespace vektor {
-
-        using usize = std::size_t;
 
         using i8 = std::int8_t;
         using i16 = std::int16_t;
